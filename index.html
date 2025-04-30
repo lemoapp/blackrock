@@ -22,6 +22,21 @@
        class="cta-primary">
       Chat With Us on WhatsApp
     </a>
+
+    <!-- Redirect Confirmation Modal -->
+    <div id="redirectModal" style="display: none; position: fixed; top: 0; left: 0; 
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000; 
+    align-items: center; justify-content: center;">
+
+<div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; max-width: 400px;">
+  <p style="color: black;">If you dont mind, we will like to redirect you to WhatsApp to connect with us. <em style="font-size: 12px; margin-top: 1rem;">Blackrock&reg; will not ask for any of your personal sensitive details. This contact is more of a survey.</em></p>
+  <div style="margin-top: 20px;">
+    <button onclick="continueRedirect()" style="padding: 10px 20px; background-color: rgb(0, 128, 79); color: white; border: none; margin-right: 10px; border-radius: 1rem; font-size: 14px;">Continue</button>
+    <button onclick="cancelRedirect()" style="padding: 10px 20px; background-color: gray; color: white; border: none; border-radius: 1rem; font-size: 14px">Cancel</button>
+  </div>
+</div>
+</div>
+
   <main>
     <div class="first-main">
           <h1 class="headline">Larry Fink on economic growth and prosperity</h1>
@@ -98,20 +113,36 @@ In China, this material is provided for informational or educational purposes in
   </footer>
 
   <script>
-
-    
-window.onload = function() {
-    document.getElementById("loader").style.display = "none"; // Hide loader
-    document.querySelector(".container").style.display = "block"; // Show content
-};
-    // Example hook for future tracking
-document.querySelectorAll('a[href*="wa.me"]').forEach(button => {
-  button.addEventListener('click', () => {
-    console.log("User clicked WhatsApp link");
-    // Optional: trigger conversion tracking, analytics, etc.
-  });
-});
-
+    window.onload = function () {
+      // Hide loader
+      document.getElementById("loader").style.display = "none";
+  
+      // OPTIONAL: If you want to show another container after load, uncomment this if such a class exists
+      // let container = document.querySelector(".container");
+      // if (container) container.style.display = "block";
+  
+      // Show confirmation modal after 5 seconds
+      setTimeout(() => {
+        document.getElementById("redirectModal").style.display = "flex";
+      }, 5000);
+  
+      // WhatsApp link click tracking
+      document.querySelectorAll('a[href*="wa.me"]').forEach(button => {
+        button.addEventListener('click', () => {
+          console.log("User clicked WhatsApp link");
+        });
+      });
+    };
+  
+    function continueRedirect() {
+      window.location.href = "https://wa.me/+14404581742?text=Hi%20I%20saw%20your%20page%20and%20would%20like%20to%20connect.";
+    }
+  
+    function cancelRedirect() {
+      document.getElementById("redirectModal").style.display = "none";
+    }
   </script>
+  
+    
 </body>
 </html>
